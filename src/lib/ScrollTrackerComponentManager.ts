@@ -1,7 +1,7 @@
-import { IScrollTrackerComponentManagerOptions } from 'lib/interface/IScrollTrackerComponentManagerOptions';
+import { IScrollTrackerComponentManagerOptions } from './interface/IScrollTrackerComponentManagerOptions';
 import ScrollTracker from 'seng-scroll-tracker/lib/ScrollTracker';
 import ScrollTrackerEvent from 'seng-scroll-tracker/lib/event/ScrollTrackerEvent';
-import ScrollUtils from 'lib/util/ScrollUtils';
+import ScrollUtils from './util/ScrollUtils';
 import isArray from 'lodash/isArray';
 import isObject from 'lodash/isObject';
 import debounce from 'lodash/debounce';
@@ -51,14 +51,14 @@ export default class ScrollTrackerComponentManager<T> {
       componentId: 'componentId',
     },
     config: {
-      setDebugLabel: false,
+      setDebugLabel: true,
       debugBorderColor: 'red',
       resizeDebounce: 100,
     },
   };
 
   constructor(options: IScrollTrackerComponentManagerOptions) {
-    Object.assign(this.options, options);
+    this.options = Object.assign(this.options, options);
 
     this.resizeEventListener = debounce(
       this.handleResize.bind(this),
@@ -259,8 +259,6 @@ export default class ScrollTrackerComponentManager<T> {
    */
   private handleComponentEnterView(componentId: string): void {
     if (this.components[componentId]) {
-      // this.components[componentId].inView = true;
-
       // Start Looping Animations
       // if (!this.components[componentId].transitionController.loopingAnimationStarted) {
       this.components[componentId][this.options.methods.startLoopingAnimation]();
@@ -278,8 +276,6 @@ export default class ScrollTrackerComponentManager<T> {
    * @returns void
    */
   private handleComponentLeaveView(componentId: string): void {
-    // this.components[componentId].inView = false;
-
     // Stop looping animations
     this.components[componentId][this.options.methods.stopLoopingAnimation]();
   }
@@ -295,7 +291,6 @@ export default class ScrollTrackerComponentManager<T> {
    */
   private handleComponentBeyondView(componentId: string): void {
     if (this.components[componentId]) {
-      // this.components[componentId].inView = true;
       // todo maybe seek to progress(1) to avoid (unnecessary) performance issue's
       this.components[componentId][this.options.methods.transitionIn]();
     }

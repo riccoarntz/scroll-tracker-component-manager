@@ -3,7 +3,7 @@
  * @description Simple class used for basic scroll actions on the body
  *
  */
-class ScrollUtils {
+export default class ScrollUtils {
   /**
    * @public static
    * @method set scrollTop
@@ -33,5 +33,3 @@ class ScrollUtils {
     return document.documentElement.clientHeight ? document.documentElement : document.body;
   }
 }
-
-export default ScrollUtils;
