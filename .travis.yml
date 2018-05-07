@@ -1,0 +1,27 @@
+language: node_js
+
+cache: yarn
+
+node_js:
+  - 'stable'
+  - '6'
+  - '8'
+
+sudo: false
+
+before_install:
+  - yarn global add codeclimate-test-reporter
+
+script:
+  - yarn test
+
+deploy:
+  - provider: npm
+    email: 'devmonk@mediamonks.com'
+    api_key: $NPM_TOKEN
+    on:
+      tags: true
+      node: '8'
+    skip_cleanup: true
+
+
