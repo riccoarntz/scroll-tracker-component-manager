@@ -1,0 +1,919 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ScrollTrackerComponentManager | scroll-tracker-component-manager</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">scroll-tracker-component-manager</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="scrolltrackercomponentmanager.html">ScrollTrackerComponentManager</a>
+				</li>
+			</ul>
+			<h1>Class ScrollTrackerComponentManager&lt;T&gt;</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">ScrollTrackerComponentManager</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="scrolltrackercomponentmanager.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="scrolltrackercomponentmanager.html#components" class="tsd-kind-icon">components</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="scrolltrackercomponentmanager.html#resizeeventlistener" class="tsd-kind-icon">resize<wbr>Event<wbr>Listener</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="scrolltrackercomponentmanager.html#scrolltracker" class="tsd-kind-icon">scroll<wbr>Tracker</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="scrolltrackercomponentmanager.html#scrolltrackerpoints" class="tsd-kind-icon">scroll<wbr>Tracker<wbr>Points</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="scrolltrackercomponentmanager.html#addcomponenttoscrolltracker" class="tsd-kind-icon">add<wbr>Component<wbr>ToScroll<wbr>Tracker</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="scrolltrackercomponentmanager.html#addcomponentstoscrolltrackers" class="tsd-kind-icon">add<wbr>Components<wbr>ToScroll<wbr>Trackers</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="scrolltrackercomponentmanager.html#dispose" class="tsd-kind-icon">dispose</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="scrolltrackercomponentmanager.html#getscrolltrackerdata" class="tsd-kind-icon">get<wbr>Scroll<wbr>Tracker<wbr>Data</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="scrolltrackercomponentmanager.html#handlecomponentbeyondview" class="tsd-kind-icon">handle<wbr>Component<wbr>Beyond<wbr>View</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="scrolltrackercomponentmanager.html#handlecomponententerview" class="tsd-kind-icon">handle<wbr>Component<wbr>Enter<wbr>View</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="scrolltrackercomponentmanager.html#handlecomponentleaveview" class="tsd-kind-icon">handle<wbr>Component<wbr>Leave<wbr>View</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="scrolltrackercomponentmanager.html#handleresize" class="tsd-kind-icon">handle<wbr>Resize</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="scrolltrackercomponentmanager.html#removecomponentfromscrolltracker" class="tsd-kind-icon">remove<wbr>Component<wbr>From<wbr>Scroll<wbr>Tracker</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="scrolltrackercomponentmanager.html#removecomponentsfromscrolltracker" class="tsd-kind-icon">remove<wbr>Components<wbr>From<wbr>Scroll<wbr>Tracker</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="scrolltrackercomponentmanager.html#setdebuglabel" class="tsd-kind-icon">set<wbr>Debug<wbr>Label</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="scrolltrackercomponentmanager.html#updatescrolltrackerpoints" class="tsd-kind-icon">update<wbr>Scroll<wbr>Tracker<wbr>Points</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+							<h3>Object literals</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-object-literal tsd-parent-kind-class tsd-is-private"><a href="scrolltrackercomponentmanager.html#options" class="tsd-kind-icon">options</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Scroll<wbr>Tracker<wbr>Component<wbr>Manager<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/iscrolltrackercomponentmanageroptions.html" class="tsd-signature-type">IScrollTrackerComponentManagerOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="scrolltrackercomponentmanager.html" class="tsd-signature-type">ScrollTrackerComponentManager</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L58">lib/ScrollTrackerComponentManager.ts:58</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/iscrolltrackercomponentmanageroptions.html" class="tsd-signature-type">IScrollTrackerComponentManagerOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="scrolltrackercomponentmanager.html" class="tsd-signature-type">ScrollTrackerComponentManager</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="components" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> components</h3>
+					<div class="tsd-signature tsd-kind-icon">components<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L13">lib/ScrollTrackerComponentManager.ts:13</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>description</dt>
+							<dd><p>The collection of scroll components</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">T</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="resizeeventlistener" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> resize<wbr>Event<wbr>Listener</h3>
+					<div class="tsd-signature tsd-kind-icon">resize<wbr>Event<wbr>Listener<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L34">lib/ScrollTrackerComponentManager.ts:34</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>description resizeEventListener</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="scrolltracker" class="tsd-anchor"></a>
+					<h3>scroll<wbr>Tracker</h3>
+					<div class="tsd-signature tsd-kind-icon">scroll<wbr>Tracker<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ScrollTracker</span><span class="tsd-signature-symbol"> =&nbsp;new ScrollTracker()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L21">lib/ScrollTrackerComponentManager.ts:21</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>property</dt>
+							<dd><p>scrollTracker</p>
+							</dd>
+							<dt>description</dt>
+							<dd><p>Here initiate the scrollTracker, the scrollTracker manages when a component is in view or
+								when it&#39;s not!</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="scrolltrackerpoints" class="tsd-anchor"></a>
+					<h3>scroll<wbr>Tracker<wbr>Points</h3>
+					<div class="tsd-signature tsd-kind-icon">scroll<wbr>Tracker<wbr>Points<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L29">lib/ScrollTrackerComponentManager.ts:29</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>property</dt>
+							<dd><p>scrollTrackerPoints</p>
+							</dd>
+							<dt>description</dt>
+							<dd><p>Here we keep track of the scrollTracker points on this page</p>
+							</dd>
+							<dt>type</dt>
+							<dd><p>{{}}</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="addcomponenttoscrolltracker" class="tsd-anchor"></a>
+					<h3>add<wbr>Component<wbr>ToScroll<wbr>Tracker</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Component<wbr>ToScroll<wbr>Tracker<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L71">lib/ScrollTrackerComponentManager.ts:71</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>addComponentToScrollTracker</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>component: <span class="tsd-signature-type">T</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="addcomponentstoscrolltrackers" class="tsd-anchor"></a>
+					<h3>add<wbr>Components<wbr>ToScroll<wbr>Trackers</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Components<wbr>ToScroll<wbr>Trackers<span class="tsd-signature-symbol">(</span>components<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L121">lib/ScrollTrackerComponentManager.ts:121</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>addComponentsToScrollTrackers</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>components: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="dispose" class="tsd-anchor"></a>
+					<h3>dispose</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">dispose<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L332">lib/ScrollTrackerComponentManager.ts:332</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getscrolltrackerdata" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Scroll<wbr>Tracker<wbr>Data</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Scroll<wbr>Tracker<wbr>Data<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L235">lib/ScrollTrackerComponentManager.ts:235</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>getScrollTrackerData</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>component: <span class="tsd-signature-type">T</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>y<wbr>Position<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="handlecomponentbeyondview" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> handle<wbr>Component<wbr>Beyond<wbr>View</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Component<wbr>Beyond<wbr>View<span class="tsd-signature-symbol">(</span>componentId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L294">lib/ScrollTrackerComponentManager.ts:294</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>handleComponentBeyondView</p>
+									</dd>
+									<dt>description</dt>
+									<dd><p>When the scrollbar is dragged down super fast the default enter view event might not be
+											triggered therefor we have a beyondView event! If it&#39;s already transitioned in it will do nothing! But if
+										it&#39;s not transitioned in it will still try to transitionIn</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>componentId: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<p>void</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="handlecomponententerview" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> handle<wbr>Component<wbr>Enter<wbr>View</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Component<wbr>Enter<wbr>View<span class="tsd-signature-symbol">(</span>componentId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L258">lib/ScrollTrackerComponentManager.ts:258</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>handleComponentEnterView</p>
+									</dd>
+									<dt>description</dt>
+									<dd><p>When a scrollComponent enters the view we want to trigger the transition in method and mark the block
+										as inView</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>componentId: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<p>void</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="handlecomponentleaveview" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> handle<wbr>Component<wbr>Leave<wbr>View</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Component<wbr>Leave<wbr>View<span class="tsd-signature-symbol">(</span>componentId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L278">lib/ScrollTrackerComponentManager.ts:278</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>handleComponentLeaveView</p>
+									</dd>
+									<dt>description</dt>
+									<dd><p>When a scrollComponent leaves the view we set the inView flag to false</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>componentId: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<p>void</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="handleresize" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> handle<wbr>Resize</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Resize<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L227">lib/ScrollTrackerComponentManager.ts:227</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>handleResize</p>
+									</dd>
+									<dt>description</dt>
+									<dd><p>When the window resize event is triggered  we need to recalculate the scrollTrackerPoints so the
+										transitionIn happens on the right moments!</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<p>void</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="removecomponentfromscrolltracker" class="tsd-anchor"></a>
+					<h3>remove<wbr>Component<wbr>From<wbr>Scroll<wbr>Tracker</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Component<wbr>From<wbr>Scroll<wbr>Tracker<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L153">lib/ScrollTrackerComponentManager.ts:153</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>removeComponentFromScrollTracker</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>component: <span class="tsd-signature-type">T</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="removecomponentsfromscrolltracker" class="tsd-anchor"></a>
+					<h3>remove<wbr>Components<wbr>From<wbr>Scroll<wbr>Tracker</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Components<wbr>From<wbr>Scroll<wbr>Tracker<span class="tsd-signature-symbol">(</span>components<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L137">lib/ScrollTrackerComponentManager.ts:137</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>removeComponentsFromScrollTracker</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>components: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="setdebuglabel" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> set<wbr>Debug<wbr>Label</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Debug<wbr>Label<span class="tsd-signature-symbol">(</span>componentId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L306">lib/ScrollTrackerComponentManager.ts:306</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>method</dt>
+									<dd><p>setDebugLabel</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>componentId: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="updatescrolltrackerpoints" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> update<wbr>Scroll<wbr>Tracker<wbr>Points</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Scroll<wbr>Tracker<wbr>Points<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L204">lib/ScrollTrackerComponentManager.ts:204</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>description</dt>
+									<dd><p>Recalculate the scrollTrackerPoints so the transitionIn happens on the right moment!</p>
+									</dd>
+									<dt>method</dt>
+									<dd><p>updateScrollTrackerPoints</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+				<h2>Object literals</h2>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class tsd-is-private">
+					<a name="options" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> options</h3>
+					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L41">lib/ScrollTrackerComponentManager.ts:41</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>description</dt>
+							<dd><p>Methods/properties/elements that are called on the component which can be overwritten to pass
+								along a component with a different interface.</p>
+							</dd>
+						</dl>
+					</div>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="options.element" class="tsd-anchor"></a>
+						<h3>element</h3>
+						<div class="tsd-signature tsd-kind-icon">element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;element&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L42">lib/ScrollTrackerComponentManager.ts:42</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal">
+						<a name="options.config" class="tsd-anchor"></a>
+						<h3>config</h3>
+						<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L53">lib/ScrollTrackerComponentManager.ts:53</a></li>
+							</ul>
+						</aside>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+							<a name="options.config.debugbordercolor" class="tsd-anchor"></a>
+							<h3>debug<wbr>Border<wbr>Color</h3>
+							<div class="tsd-signature tsd-kind-icon">debug<wbr>Border<wbr>Color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;red&quot;</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L55">lib/ScrollTrackerComponentManager.ts:55</a></li>
+								</ul>
+							</aside>
+						</section>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+							<a name="options.config.resizedebounce" class="tsd-anchor"></a>
+							<h3>resize<wbr>Debounce</h3>
+							<div class="tsd-signature tsd-kind-icon">resize<wbr>Debounce<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;100</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L56">lib/ScrollTrackerComponentManager.ts:56</a></li>
+								</ul>
+							</aside>
+						</section>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+							<a name="options.config.setdebuglabel-1" class="tsd-anchor"></a>
+							<h3>set<wbr>Debug<wbr>Label</h3>
+							<div class="tsd-signature tsd-kind-icon">set<wbr>Debug<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L54">lib/ScrollTrackerComponentManager.ts:54</a></li>
+								</ul>
+							</aside>
+						</section>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal">
+						<a name="options.methods" class="tsd-anchor"></a>
+						<h3>methods</h3>
+						<div class="tsd-signature tsd-kind-icon">methods<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L43">lib/ScrollTrackerComponentManager.ts:43</a></li>
+							</ul>
+						</aside>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+							<a name="options.methods.startloopinganimation" class="tsd-anchor"></a>
+							<h3>start<wbr>Looping<wbr>Animation</h3>
+							<div class="tsd-signature tsd-kind-icon">start<wbr>Looping<wbr>Animation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;startLoopingAnimation&quot;</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L46">lib/ScrollTrackerComponentManager.ts:46</a></li>
+								</ul>
+							</aside>
+						</section>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+							<a name="options.methods.stoploopinganimation" class="tsd-anchor"></a>
+							<h3>stop<wbr>Looping<wbr>Animation</h3>
+							<div class="tsd-signature tsd-kind-icon">stop<wbr>Looping<wbr>Animation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;stopLoopingAnimation&quot;</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L47">lib/ScrollTrackerComponentManager.ts:47</a></li>
+								</ul>
+							</aside>
+						</section>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+							<a name="options.methods.transitionin" class="tsd-anchor"></a>
+							<h3>transition<wbr>In</h3>
+							<div class="tsd-signature tsd-kind-icon">transition<wbr>In<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;transitionIn&quot;</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L44">lib/ScrollTrackerComponentManager.ts:44</a></li>
+								</ul>
+							</aside>
+						</section>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+							<a name="options.methods.transitionout" class="tsd-anchor"></a>
+							<h3>transition<wbr>Out</h3>
+							<div class="tsd-signature tsd-kind-icon">transition<wbr>Out<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;transitionOut&quot;</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L45">lib/ScrollTrackerComponentManager.ts:45</a></li>
+								</ul>
+							</aside>
+						</section>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal">
+						<a name="options.vars" class="tsd-anchor"></a>
+						<h3>vars</h3>
+						<div class="tsd-signature tsd-kind-icon">vars<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L49">lib/ScrollTrackerComponentManager.ts:49</a></li>
+							</ul>
+						</aside>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+							<a name="options.vars.componentid" class="tsd-anchor"></a>
+							<h3>component<wbr>Id</h3>
+							<div class="tsd-signature tsd-kind-icon">component<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;componentId&quot;</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L51">lib/ScrollTrackerComponentManager.ts:51</a></li>
+								</ul>
+							</aside>
+						</section>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+							<a name="options.vars.transitioninthreshold" class="tsd-anchor"></a>
+							<h3>transition<wbr>InThreshold</h3>
+							<div class="tsd-signature tsd-kind-icon">transition<wbr>InThreshold<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;transitionInThreshold&quot;</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/riccomediamonks/scroll-tracker-component-manager/blob/920677f/src/lib/ScrollTrackerComponentManager.ts#L50">lib/ScrollTrackerComponentManager.ts:50</a></li>
+								</ul>
+							</aside>
+						</section>
+					</section>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-has-type-parameter">
+						<a href="scrolltrackercomponentmanager.html" class="tsd-kind-icon">Scroll<wbr>Tracker<wbr>Component<wbr>Manager</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="scrolltrackercomponentmanager.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="scrolltrackercomponentmanager.html#components" class="tsd-kind-icon">components</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="scrolltrackercomponentmanager.html#resizeeventlistener" class="tsd-kind-icon">resize<wbr>Event<wbr>Listener</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="scrolltrackercomponentmanager.html#scrolltracker" class="tsd-kind-icon">scroll<wbr>Tracker</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="scrolltrackercomponentmanager.html#scrolltrackerpoints" class="tsd-kind-icon">scroll<wbr>Tracker<wbr>Points</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="scrolltrackercomponentmanager.html#addcomponenttoscrolltracker" class="tsd-kind-icon">add<wbr>Component<wbr>ToScroll<wbr>Tracker</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="scrolltrackercomponentmanager.html#addcomponentstoscrolltrackers" class="tsd-kind-icon">add<wbr>Components<wbr>ToScroll<wbr>Trackers</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="scrolltrackercomponentmanager.html#dispose" class="tsd-kind-icon">dispose</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="scrolltrackercomponentmanager.html#getscrolltrackerdata" class="tsd-kind-icon">get<wbr>Scroll<wbr>Tracker<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="scrolltrackercomponentmanager.html#handlecomponentbeyondview" class="tsd-kind-icon">handle<wbr>Component<wbr>Beyond<wbr>View</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="scrolltrackercomponentmanager.html#handlecomponententerview" class="tsd-kind-icon">handle<wbr>Component<wbr>Enter<wbr>View</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="scrolltrackercomponentmanager.html#handlecomponentleaveview" class="tsd-kind-icon">handle<wbr>Component<wbr>Leave<wbr>View</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="scrolltrackercomponentmanager.html#handleresize" class="tsd-kind-icon">handle<wbr>Resize</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="scrolltrackercomponentmanager.html#removecomponentfromscrolltracker" class="tsd-kind-icon">remove<wbr>Component<wbr>From<wbr>Scroll<wbr>Tracker</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="scrolltrackercomponentmanager.html#removecomponentsfromscrolltracker" class="tsd-kind-icon">remove<wbr>Components<wbr>From<wbr>Scroll<wbr>Tracker</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="scrolltrackercomponentmanager.html#setdebuglabel" class="tsd-kind-icon">set<wbr>Debug<wbr>Label</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="scrolltrackercomponentmanager.html#updatescrolltrackerpoints" class="tsd-kind-icon">update<wbr>Scroll<wbr>Tracker<wbr>Points</a>
+							</li>
+							<li class=" tsd-kind-object-literal tsd-parent-kind-class tsd-is-private">
+								<a href="scrolltrackercomponentmanager.html#options" class="tsd-kind-icon">options</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="scrollutils.html" class="tsd-kind-icon">Scroll<wbr>Utils</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/iscrolltrackercomponentmanageroptions.html" class="tsd-kind-icon">IScroll<wbr>Tracker<wbr>Component<wbr>Manager<wbr>Options</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
