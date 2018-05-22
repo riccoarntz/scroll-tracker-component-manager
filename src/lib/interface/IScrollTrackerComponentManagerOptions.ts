@@ -1,13 +1,12 @@
 export interface IScrollTrackerComponentManagerOptions {
   element?: string;
   methods?: {
-    transitionIn?: string;
-    transitionOut?: string;
-    startLoopingAnimation?: string;
-    stopLoopingAnimation?: string;
+    enterView?: string;
+    leaveView?: string;
+    beyondView?: string;
   };
   vars?: {
-    transitionInThreshold?: string;
+    enterViewThreshold?: string;
     componentId?: string;
   };
   config?: {

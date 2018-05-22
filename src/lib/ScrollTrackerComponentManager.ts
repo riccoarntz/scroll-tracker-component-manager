@@ -41,13 +41,12 @@ export default class ScrollTrackerComponentManager<T> {
   private options: IScrollTrackerComponentManagerOptions = {
     element: 'element',
     methods: {
-      transitionIn: 'transitionIn',
-      transitionOut: 'transitionOut',
-      startLoopingAnimation: 'startLoopingAnimation',
-      stopLoopingAnimation: 'stopLoopingAnimation',
+      enterView: 'enterView',
+      leaveView: 'leaveView',
+      beyondView: 'beyondView',
     },
     vars: {
-      transitionInThreshold: 'transitionInThreshold',
+      enterViewThreshold: 'enterViewThreshold',
       componentId: 'componentId',
     },
     config: {
@@ -185,8 +184,9 @@ export default class ScrollTrackerComponentManager<T> {
         // Remove the point from the object
         delete this.scrollTrackerPoints[componentId];
 
+        // todo check with Lars why this is needed, maybe logic for outside of this package.
         // Reset the transition state
-        this.components[componentId][this.options.methods.transitionOut](true);
+        // this.components[componentId][this.options.methods.transitionOut](true);
 
         // Remove the block reference
         delete this.components[componentId];
@@ -200,7 +200,7 @@ export default class ScrollTrackerComponentManager<T> {
 
   /**
    * @private
-   * @description Recalculate the scrollTrackerPoints so the transitionIn happens on the right moment!
+   * @description Recalculate the scrollTrackerPoints so the enterView happens on the right moment!
    * @method updateScrollTrackerPoints
    */
   private updateScrollTrackerPoints(): void {
@@ -223,7 +223,7 @@ export default class ScrollTrackerComponentManager<T> {
    * @private
    * @method handleResize
    * @description When the window resize event is triggered  we need to recalculate the scrollTrackerPoints so the
-   * transitionIn happens on the right moments!
+   * enterView happens on the right moments!
    * @returns void
    */
   private handleResize(): void {
@@ -240,7 +240,7 @@ export default class ScrollTrackerComponentManager<T> {
 
     if (getComputedStyle(component[this.options.element]).position !== 'fixed') {
       yPosition += ScrollUtils.scrollTop;
-      threshold = window.innerHeight * component[this.options.vars.transitionInThreshold];
+      threshold = window.innerHeight * component[this.options.vars.enterViewThreshold];
     }
 
     return {
@@ -253,31 +253,26 @@ export default class ScrollTrackerComponentManager<T> {
    * @private
    * @method handleComponentEnterView
    * @param componentId
-   * @description When a scrollComponent enters the view we want to trigger the transition in method and mark the block
-   * as inView
+   * @description When a scrollComponent enters the view.
    * @returns void
    */
   private handleComponentEnterView(componentId: string): void {
     if (this.components[componentId]) {
-      // Start Looping Animations
-      // if (!this.components[componentId].transitionController.loopingAnimationStarted) {
-      this.components[componentId][this.options.methods.startLoopingAnimation]();
-      // }
-
-      this.components[componentId][this.options.methods.transitionIn]();
+      this.components[componentId][this.options.methods.enterView]();
     }
   }
 
   /**
    * @private
    * @method handleComponentLeaveView
-   * @description When a scrollComponent leaves the view we set the inView flag to false
+   * @description When a scrollComponent leaves the view.
    * @param componentId
    * @returns void
    */
   private handleComponentLeaveView(componentId: string): void {
-    // Stop looping animations
-    this.components[componentId][this.options.methods.stopLoopingAnimation]();
+    if (this.components[componentId]) {
+      this.components[componentId][this.options.methods.leaveView]();
+    }
   }
 
   /**
@@ -285,14 +280,12 @@ export default class ScrollTrackerComponentManager<T> {
    * @method handleComponentBeyondView
    * @param componentId
    * @description When the scrollbar is dragged down super fast the default enter view event might not be
-   * triggered therefor we have a beyondView event! If it's already transitioned in it will do nothing! But if
-   * it's not transitioned in it will still try to transitionIn
+   * triggered therefor we have a beyondView event!
    * @returns void
    */
   private handleComponentBeyondView(componentId: string): void {
     if (this.components[componentId]) {
-      // todo maybe seek to progress(1) to avoid (unnecessary) performance issue's
-      this.components[componentId][this.options.methods.transitionIn]();
+      this.components[componentId][this.options.methods.beyondView]();
     }
   }
 
