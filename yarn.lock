@@ -3778,9 +3778,9 @@ seng-event@^1.2.3:
     seng-disposable "^1.1.3"
     tslib "^1.2.0"
 
-seng-scroll-tracker@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/seng-scroll-tracker/-/seng-scroll-tracker-1.1.2.tgz#8e0ecfad61149677c90e45f5b7479ebf050b4c9c"
+seng-scroll-tracker@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/seng-scroll-tracker/-/seng-scroll-tracker-1.2.2.tgz#2c1f8c16e0a711f49d924d5d12b9fb54735d60f3"
   dependencies:
     element-size "^1.1.1"
     lodash "^4.17.4"
