@@ -39,6 +39,7 @@ different/custom interface.
       vars: {
         enterViewThreshold: 'enterViewThreshold',
         componentId: 'myComponentId',
+        hasEntered: 'myHasEntered'
       },
       config: {
         setDebugLabel: true,
@@ -53,11 +54,13 @@ different/custom interface.
 * enterView - MethodName of the component which is triggered when the component is within the 
 viewport.
 * leaveView - MethodName of the component which is triggered when the component has left the viewport.
-* beyondView - MethodName of the component which is triggered when the scrollbar is dragged down super fast while 
-the default enterView method was not triggered.
+* beyondView - MethodName of the component which is triggered everytime it is already scrolled passed a component, or
+ when you would load a page while the scrollbar is already at the bottom or passed a component.
 * enterViewThreshold - PropertyName of the component that contains a number between 0 - 1. Setting this number to 
 for example 0.5 will trigger the enterView method when the component is already visible for 50% within your 
 viewport.
+* hasEntered - PropertyName of the component that should is by default set to false. Will be set to value if it has 
+passed the viewport once already.
 * componentId - PropertyName of the component that should contain a unique string for each added component.
 * setDebugLabel - Enable/Disable visible scroll-tracker-points for each component, this will allow to you see when the 
 transitionIn/Out is called.
@@ -86,7 +89,7 @@ Clone a copy of the repo:
 git clone https://github.com/riccomediamonks/scroll-tracker-component-manager.git
 ```
 
-Change to the vue-transition directory:
+Change to the scroll-tracker-component-manager directory:
 ```sh
 cd scroll-tracker-component-manager
 ```

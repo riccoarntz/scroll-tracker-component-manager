@@ -48,6 +48,7 @@ export default class ScrollTrackerComponentManager<T> {
     vars: {
       enterViewThreshold: 'enterViewThreshold',
       componentId: 'componentId',
+      hasEntered: 'hasEntered',
     },
     config: {
       setDebugLabel: true,
@@ -96,19 +97,25 @@ export default class ScrollTrackerComponentManager<T> {
         ScrollTrackerEvent.ENTER_VIEW,
         this.scrollTrackerPoints[componentId].enterViewListener,
       );
+
       scrollTrackerPoint.addEventListener(
         ScrollTrackerEvent.LEAVE_VIEW,
         this.scrollTrackerPoints[componentId].leaveViewListener,
       );
+
       scrollTrackerPoint.addEventListener(
         ScrollTrackerEvent.SCROLLED_BEYOND,
         this.scrollTrackerPoints[componentId].beyondViewListener,
       );
 
-      // Check for the position on init
-      if (scrollTrackerPoint.isInBounds) {
-        this.handleComponentEnterView(componentId);
-      }
+      setTimeout(() => {
+        // Check for the position on init
+        if (scrollTrackerPoint.isInView) {
+          this.handleComponentEnterView(componentId);
+        } else if (scrollTrackerPoint.hasScrolledBeyond) {
+          this.handleComponentBeyondView(componentId);
+        }
+      }, 100);
 
       // Add a debug label
       setTimeout(() => this.setDebugLabel(componentId), 100);
@@ -166,6 +173,7 @@ export default class ScrollTrackerComponentManager<T> {
           ScrollTrackerEvent.LEAVE_VIEW,
           scrollTrackerPoint.leaveViewListener,
         );
+
         scrollTrackerPoint.point.removeEventListener(
           ScrollTrackerEvent.SCROLLED_BEYOND,
           scrollTrackerPoint.beyondViewListener,
@@ -259,6 +267,7 @@ export default class ScrollTrackerComponentManager<T> {
   private handleComponentEnterView(componentId: string): void {
     if (this.components[componentId]) {
       this.components[componentId][this.options.methods.enterView]();
+      this.components[componentId][this.options.vars.hasEntered] = true;
     }
   }
 
@@ -278,14 +287,15 @@ export default class ScrollTrackerComponentManager<T> {
   /**
    * @private
    * @method handleComponentBeyondView
+   * @description Called everytime it is already scrolled passed a component, or when you would load a page while
+   * the scrollbar is already at the bottom or passed a component.
    * @param componentId
-   * @description When the scrollbar is dragged down super fast the default enter view event might not be
-   * triggered therefor we have a beyondView event!
    * @returns void
    */
   private handleComponentBeyondView(componentId: string): void {
     if (this.components[componentId]) {
       this.components[componentId][this.options.methods.beyondView]();
+      this.components[componentId][this.options.vars.hasEntered] = true;
     }
   }
 

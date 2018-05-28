@@ -8,6 +8,7 @@ export interface IScrollTrackerComponentManagerOptions {
   vars?: {
     enterViewThreshold?: string;
     componentId?: string;
+    hasEntered?: string;
   };
   config?: {
     setDebugLabel?: boolean;
