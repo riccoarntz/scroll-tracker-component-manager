@@ -228,13 +228,13 @@ export default class ScrollTrackerComponentManager<T> {
   }
 
   /**
-   * @private
+   * @public
    * @method handleResize
    * @description When the window resize event is triggered  we need to recalculate the scrollTrackerPoints so the
    * enterView happens on the right moments!
    * @returns void
    */
-  private handleResize(): void {
+  public handleResize(): void {
     this.updateScrollTrackerPoints();
   }
 
