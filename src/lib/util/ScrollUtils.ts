@@ -10,7 +10,7 @@ export default class ScrollUtils {
    * @param y
    */
   public static set scrollTop(y: number) {
-    this.scrollElement.scrollTop = y;
+    window.scrollTo(0, y);
   }
 
   /**
@@ -19,17 +19,6 @@ export default class ScrollUtils {
    * @returns {number}
    */
   public static get scrollTop(): number {
-    return this.scrollElement.scrollTop;
-  }
-
-  /**
-   * Method used to get the scrollElement for all browsers.
-   *
-   * @private static
-   * @method get scrollElement
-   * @returns {Element|HTMLElement}
-   */
-  private static get scrollElement(): Element {
-    return document.documentElement.clientHeight ? document.documentElement : document.body;
+    return window.pageYOffset || document.documentElement.scrollTop;
   }
 }
