@@ -21,6 +21,13 @@ export default class ScrollTrackerComponentManager<T> {
   private scrollTracker: ScrollTracker;
 
   /**
+   * @private
+   * @property debugLabelContainer
+   * @description The container that holds the debug labels if they are injected into the page
+   */
+  private debugLabelContainer: HTMLElement;
+
+  /**
    * @public
    * @property scrollTrackerPoints
    * @description Here we keep track of the scrollTracker points on this page
@@ -64,6 +71,8 @@ export default class ScrollTrackerComponentManager<T> {
   constructor(options: IScrollTrackerComponentManagerOptions) {
     this.options = Object.assign(this.options, options);
     this.scrollTracker = new ScrollTracker(this.options.container);
+    this.debugLabelContainer =
+      this.options.container === window ? document.body : <HTMLElement>this.options.container;
     this.resizeEventListener = debounce(
       this.handleResize.bind(this),
       this.options.config.resizeDebounce,
@@ -190,8 +199,8 @@ export default class ScrollTrackerComponentManager<T> {
 
         // Remove the debug label
         if (this.options.config.setDebugLabel) {
-          document.body.removeChild(
-            document.body.querySelector('.scroll-' + componentId.replace('.', '-')),
+          this.debugLabelContainer.removeChild(
+            this.debugLabelContainer.querySelector('.scroll-' + componentId.replace('.', '-')),
           );
         }
 
@@ -338,10 +347,7 @@ export default class ScrollTrackerComponentManager<T> {
         }`;
 
         scrollTrackerPoint.debugLabel.appendChild(label);
-
-        const labelContainer =
-          this.options.container === window ? document.body : this.options.container;
-        (<HTMLElement>labelContainer).appendChild(scrollTrackerPoint.debugLabel);
+        this.debugLabelContainer.appendChild(scrollTrackerPoint.debugLabel);
       }
 
       scrollTrackerPoint.debugLabel.style.height = `${scrollTrackerPoint.point.height}px`;
