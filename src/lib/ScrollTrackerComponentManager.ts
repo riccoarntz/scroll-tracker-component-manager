@@ -57,6 +57,9 @@ export default class ScrollTrackerComponentManager<T> {
     },
   };
 
+  /**
+   * @param {IScrollTrackerComponentManagerOptions} options
+   */
   constructor(options: IScrollTrackerComponentManagerOptions) {
     this.options = Object.assign(this.options, options);
 
@@ -68,8 +71,10 @@ export default class ScrollTrackerComponentManager<T> {
   }
 
   /**
-   * @public
-   * @method addComponentToScrollTracker
+   * @description Here we will add the position+end-position of the component to the scroll-tracker, when we are
+   * scrolling the window and once these positions entered/left the viewport we will trigger the corresponding
+   * method on the added component.
+   * @param {T} component
    */
   public addComponentToScrollTracker(component: T): void {
     this.components[component[this.options.vars.componentId]] = component;
@@ -123,8 +128,9 @@ export default class ScrollTrackerComponentManager<T> {
   }
 
   /**
-   * @public
-   * @method addComponentsToScrollTrackers
+   * @description Here you can pass a group (Array or Object) of components to the scroll-tracker, we basically loop
+   * through the components and add it via the 'singular-method' addComponentToScrollTracker.
+   * @param {Array<T> | {[p: string]: T}} components
    */
   public addComponentsToScrollTrackers(components: Array<T> | { [key: string]: T }): void {
     if (isArray(components)) {
@@ -139,8 +145,10 @@ export default class ScrollTrackerComponentManager<T> {
   }
 
   /**
-   * @public
-   * @method removeComponentsFromScrollTracker
+   * @description Here you can pass a group (Array or Object) of components which will be removed from the
+   * scroll-tracker, we basically loop through the components and remove it via the 'singular-method'
+   * removeComponentFromScrollTracker.
+   * @param {Array<T> | {[p: string]: T}} components
    */
   public removeComponentsFromScrollTracker(components: Array<T> | { [key: string]: T }): void {
     if (isArray(components)) {
@@ -155,8 +163,9 @@ export default class ScrollTrackerComponentManager<T> {
   }
 
   /**
-   * @public
-   * @method removeComponentFromScrollTracker
+   * @description Here we will remove the component from the scroll-tracker, and clean up all it's
+   * listeners/debug-labels etc.
+   * @param {T} component
    */
   public removeComponentFromScrollTracker(component: T): void {
     const componentId = component[this.options.vars.componentId];
@@ -191,10 +200,6 @@ export default class ScrollTrackerComponentManager<T> {
 
         // Remove the point from the object
         delete this.scrollTrackerPoints[componentId];
-
-        // todo check with Lars why this is needed, maybe logic for outside of this package.
-        // Reset the transition state
-        // this.components[componentId][this.options.methods.transitionOut](true);
 
         // Remove the block reference
         delete this.components[componentId];
@@ -239,8 +244,11 @@ export default class ScrollTrackerComponentManager<T> {
   }
 
   /**
-   * @private
-   * @method getScrollTrackerData
+   *
+   * @param {T} component
+   * description Calculate and return the height and Yposition of the component, plus/minus it's threshold if that
+   * is set(position and height is used for adding to the scroll-tracker to determine enter/leave view points.
+   * @returns {{height: number; yPosition: number}}
    */
   private getScrollTrackerData(component: T): { height: number; yPosition: number } {
     let threshold = 0;
@@ -300,8 +308,9 @@ export default class ScrollTrackerComponentManager<T> {
   }
 
   /**
-   * @private
-   * @method setDebugLabel
+   * @description We add a scroll-tracker-point with it's componentId in the DOM for debugging purpose(if enabled).
+   * This indicates visually where/when the enter/leaveView methods points are fired.
+   * @param {string} componentId
    */
   private setDebugLabel(componentId: string): void {
     if (this.options.config.setDebugLabel) {
@@ -333,6 +342,9 @@ export default class ScrollTrackerComponentManager<T> {
     }
   }
 
+  /**
+   * @description This will remove all added components from the scroll-tracker and destruct the scroll-tracker.
+   */
   public dispose() {
     window.removeEventListener('resize', this.resizeEventListener);
     this.resizeEventListener = null;
