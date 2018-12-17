@@ -1,4 +1,5 @@
 export interface IScrollTrackerComponentManagerOptions {
+  container?: HTMLElement | Window;
   element?: string;
   methods?: {
     enterView?: string;

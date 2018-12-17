@@ -18,7 +18,7 @@ export default class ScrollTrackerComponentManager<T> {
    * @description Here initiate the scrollTracker, the scrollTracker manages when a component is in view or
    * when it's not!
    */
-  private scrollTracker: ScrollTracker = new ScrollTracker();
+  private scrollTracker: ScrollTracker;
 
   /**
    * @public
@@ -39,6 +39,7 @@ export default class ScrollTrackerComponentManager<T> {
    * along a component with a different interface.
    */
   private options: IScrollTrackerComponentManagerOptions = {
+    container: window,
     element: 'element',
     methods: {
       enterView: 'enterView',
@@ -62,7 +63,7 @@ export default class ScrollTrackerComponentManager<T> {
    */
   constructor(options: IScrollTrackerComponentManagerOptions) {
     this.options = Object.assign(this.options, options);
-
+    this.scrollTracker = new ScrollTracker(this.options.container);
     this.resizeEventListener = debounce(
       this.handleResize.bind(this),
       this.options.config.resizeDebounce,
@@ -84,7 +85,6 @@ export default class ScrollTrackerComponentManager<T> {
     if (!this.scrollTrackerPoints[componentId]) {
       // Get the correct data
       const scrollTrackerData = this.getScrollTrackerData(component);
-      // console.log('addComponentsToScrollTracker', componentId, scrollTrackerData);
       const scrollTrackerPoint = this.scrollTracker.addPoint(
         scrollTrackerData.yPosition,
         scrollTrackerData.height,
@@ -252,7 +252,11 @@ export default class ScrollTrackerComponentManager<T> {
    */
   private getScrollTrackerData(component: T): { height: number; yPosition: number } {
     let threshold = 0;
-    let yPosition = Math.round(component[this.options.element].getBoundingClientRect().top);
+    const baseY =
+      this.options.container === window
+        ? 0
+        : (<HTMLElement>this.options.container).getBoundingClientRect().top;
+    let yPosition = Math.round(baseY + component[this.options.element].getBoundingClientRect().top);
 
     if (getComputedStyle(component[this.options.element]).position !== 'fixed') {
       yPosition += ScrollUtils.scrollTop;
@@ -334,7 +338,10 @@ export default class ScrollTrackerComponentManager<T> {
         }`;
 
         scrollTrackerPoint.debugLabel.appendChild(label);
-        document.body.appendChild(scrollTrackerPoint.debugLabel);
+
+        const labelContainer =
+          this.options.container === window ? document.body : this.options.container;
+        (<HTMLElement>labelContainer).appendChild(scrollTrackerPoint.debugLabel);
       }
 
       scrollTrackerPoint.debugLabel.style.height = `${scrollTrackerPoint.point.height}px`;
