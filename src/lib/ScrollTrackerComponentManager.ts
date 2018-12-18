@@ -268,7 +268,10 @@ export default class ScrollTrackerComponentManager<T> {
     let yPosition = Math.round(baseY + component[this.options.element].getBoundingClientRect().top);
 
     if (getComputedStyle(component[this.options.element]).position !== 'fixed') {
-      yPosition += ScrollUtils.scrollTop;
+      yPosition +=
+        this.options.container === window
+          ? ScrollUtils.scrollTop
+          : (<HTMLElement>this.options.container).scrollTop;
       threshold = window.innerHeight * component[this.options.vars.enterViewThreshold];
     }
 
