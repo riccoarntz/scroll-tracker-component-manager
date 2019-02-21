@@ -1,11 +1,33 @@
-import SmoothScrollbar from 'smooth-scrollbar';
-import { IScrollTrackerComponentManagerOptions } from './interface/IScrollTrackerComponentManagerOptions';
-import ScrollTracker from 'seng-scroll-tracker/lib/ScrollTracker';
-import ScrollTrackerEvent from 'seng-scroll-tracker/lib/event/ScrollTrackerEvent';
-import ScrollUtils from './util/ScrollUtils';
+import debounce from 'lodash/debounce';
 import isArray from 'lodash/isArray';
 import isObject from 'lodash/isObject';
-import debounce from 'lodash/debounce';
+import Axis from 'seng-scroll-tracker/lib/enum/Axis';
+import ScrollTrackerEvent from 'seng-scroll-tracker/lib/event/ScrollTrackerEvent';
+import ScrollTracker from 'seng-scroll-tracker/lib/ScrollTracker';
+import SmoothScrollbar from 'smooth-scrollbar';
+import { IScrollTrackerComponentManagerOptions } from './interface/IScrollTrackerComponentManagerOptions';
+import ScrollUtils from './util/ScrollUtils';
+
+/**
+ * @description: the scrollTracker needs to be able to retreive the scrollHeight + scrollTop, from 1
+ * element/instance. but the when the SmoothScrollbar is used the scrollHeight and scrollTop can't be fetched from the
+ * same element/instance.
+ */
+class SmoothScrollContainer {
+  private instance: SmoothScrollbar;
+
+  constructor(instance: SmoothScrollbar) {
+    this.instance = instance;
+  }
+
+  get scrollHeight() {
+    return this.instance.contentEl.scrollHeight;
+  }
+
+  get scrollTop() {
+    return this.instance.scrollTop;
+  }
+}
 
 export default class ScrollTrackerComponentManager<T> {
   /**
@@ -42,6 +64,7 @@ export default class ScrollTrackerComponentManager<T> {
   private resizeEventListener;
 
   public smoothScrollbar: SmoothScrollbar;
+  private scrollPosition: number = 0;
 
   /**
    * @private
@@ -57,13 +80,26 @@ export default class ScrollTrackerComponentManager<T> {
     beyondView: 'beyondView',
     inViewProgress: 'inViewProgress',
 
+    inViewProgressThreshold: 'inViewProgressThreshold',
     enterViewThreshold: 'enterViewThreshold',
     componentId: 'componentId',
     hasEntered: 'hasEntered',
+    currentViewProgress: 'currentViewProgress',
 
     setDebugLabel: true,
     debugBorderColor: 'red',
     resizeDebounce: 100,
+
+    enableSmoothScroll: true,
+    smoothScrollOptions: {
+      damping: 0.1,
+      thumbMinSize: 20,
+      renderByPixels: true,
+      alwaysShowTracks: true,
+      continuousScrolling: true,
+      wheelEventTarget: null,
+      plugins: {},
+    },
   };
 
   /**
@@ -71,31 +107,55 @@ export default class ScrollTrackerComponentManager<T> {
    */
   constructor(options: IScrollTrackerComponentManagerOptions) {
     this.options = Object.assign(this.options, options);
-    this.smoothScrollbar = SmoothScrollbar.init(<HTMLElement>this.options.container, {
-      damping: 0.1,
-      thumbMinSize: 20,
-      renderByPixels: true,
-      alwaysShowTracks: true,
-      continuousScrolling: true,
-    });
 
-    this.scrollTracker = new ScrollTracker(<any>this.smoothScrollbar);
-    // this.debugLabelContainer =
-    //   this.options.container === window ? document.body : <HTMLElement>this.options.container;
-    this.debugLabelContainer = this.smoothScrollbar.contentEl;
-    this.resizeEventListener = debounce(this.handleResize.bind(this), this.options.resizeDebounce);
+    // SmoothScroll Enabled
+    if (this.options.enableSmoothScroll) {
+      this.options.smoothScrollOptions = Object.assign(
+        this.options.smoothScrollOptions,
+        options.smoothScrollOptions,
+      );
+      this.smoothScrollbar = SmoothScrollbar.init(
+        this.options.container === window ? document.body : <HTMLElement>this.options.container,
+        this.options.smoothScrollOptions,
+      );
 
-    this.smoothScrollbar.addListener(status => {
-      Object.keys(this.scrollTrackerPoints).forEach(componentId => {
-        if (this.scrollTrackerPoints[componentId].point.isInView) {
-          this.calculateComponentProgress(componentId, status.offset.y);
-        }
+      this.scrollTracker = new ScrollTracker(this.smoothScrollbar.containerEl, Axis.Y, {
+        scrollContainer: <any>new SmoothScrollContainer(this.smoothScrollbar),
+        attachScrollListener: false,
       });
 
-      this.scrollTracker.onScrollChange();
-    });
+      this.debugLabelContainer = this.smoothScrollbar.contentEl;
 
+      this.smoothScrollbar.addListener(status => {
+        this.scrollPosition = status.offset.y;
+        this.updateComponentsOnScroll(status.offset.y);
+        this.scrollTracker.update();
+      });
+
+      // Native Scroll
+    } else {
+      this.scrollTracker = new ScrollTracker(this.options.container, Axis.Y, {
+        onScroll: position => {
+          this.scrollPosition = position;
+          this.updateComponentsOnScroll(position);
+        },
+      });
+      this.debugLabelContainer =
+        this.options.container === window ? document.body : <HTMLElement>this.options.container;
+    }
+
+    this.resizeEventListener = debounce(this.handleResize.bind(this), this.options.resizeDebounce);
     window.addEventListener('resize', this.resizeEventListener);
+  }
+
+  /**
+   * @private
+   * @method updateComponentsOnScroll
+   */
+  private updateComponentsOnScroll(position: number): void {
+    Object.keys(this.scrollTrackerPoints).forEach(componentId => {
+      this.calculateComponentProgress(componentId, position);
+    });
   }
 
   /**
@@ -144,10 +204,11 @@ export default class ScrollTrackerComponentManager<T> {
         // Check for the position on init
         if (scrollTrackerPoint.isInView) {
           this.handleComponentEnterView(componentId);
-          this.calculateComponentProgress(componentId, this.smoothScrollbar.scrollTop);
         } else if (scrollTrackerPoint.hasScrolledBeyond) {
           this.handleComponentBeyondView(componentId);
         }
+
+        this.calculateComponentProgress(componentId, this.scrollPosition);
       }, 100);
 
       // Add a debug label
@@ -285,19 +346,34 @@ export default class ScrollTrackerComponentManager<T> {
         ? 0
         : (<HTMLElement>this.options.container).getBoundingClientRect().top;
     let yPosition = Math.round(baseY + component[this.options.element].getBoundingClientRect().top);
+    // const thresHoldFactor = component[this.options.enterViewThreshold] || 0;
 
     if (getComputedStyle(component[this.options.element]).position !== 'fixed') {
       yPosition +=
         this.options.container === window
           ? ScrollUtils.scrollTop
           : (<HTMLElement>this.options.container).scrollTop;
-      threshold = window.innerHeight * (component[this.options.enterViewThreshold] || 0);
+      threshold = this.getTresholdSize(component, component[this.options.enterViewThreshold]);
     }
 
     return {
       yPosition: Math.max(yPosition + threshold, 0),
       height: component[this.options.element].offsetHeight - threshold,
     };
+  }
+
+  /**
+   * @private
+   * @method getTresholdSize
+   */
+  private getTresholdSize(component: T, thresholdFactor: number = 0): number {
+    let threshold = 0;
+
+    if (getComputedStyle(component[this.options.element]).position !== 'fixed') {
+      threshold = window.innerHeight * thresholdFactor;
+    }
+
+    return threshold;
   }
 
   /**
@@ -315,15 +391,34 @@ export default class ScrollTrackerComponentManager<T> {
   }
 
   private calculateComponentProgress(componentId: string, position: number): void {
+    const component = this.components[componentId];
+
     if (this.components[componentId] && this.components[componentId][this.options.inViewProgress]) {
+      const enterViewThreshold = this.getTresholdSize(
+        component,
+        component[this.options.enterViewThreshold],
+      );
+      const inViewProgressThreshold = this.getTresholdSize(
+        component,
+        component[this.options.inViewProgressThreshold],
+      );
       const point = this.scrollTrackerPoints[componentId].point;
 
+      // The points are created with the enterViewThreshold. The progress can have a different threshold therefore we
+      // want to subtract the enterViewThreshold before doing calculations.
+      const pointPosition = point.position - enterViewThreshold + inViewProgressThreshold;
+      const pointHeight = point.pointHeight + enterViewThreshold - inViewProgressThreshold;
+
       const viewSize = point.pointTracker.viewSize;
-      const distance = viewSize + point.pointHeight;
+      const distance = viewSize + pointHeight;
       const viewEnd = position + viewSize;
 
-      const progress = Math.min(Math.max(0, (viewEnd - point.position) / distance), 1);
-      this.components[componentId][this.options.inViewProgress](progress);
+      const progress = Math.min(Math.max(0, (viewEnd - pointPosition) / distance), 1);
+
+      if (this.components[componentId][this.options.currentViewProgress] !== progress) {
+        this.components[componentId][this.options.currentViewProgress] = progress;
+        this.components[componentId][this.options.inViewProgress](progress);
+      }
     }
   }
 

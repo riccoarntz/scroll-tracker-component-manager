@@ -6,7 +6,7 @@ export default class App extends CoreComponent {
   static displayName: string = 'app-root';
 
   public scrollTrackerComponentManager: ScrollTrackerComponentManager<any> = new ScrollTrackerComponentManager<any>({
-    container: document.body,
+    // container: document.body,
     setDebugLabel: true,
     debugBorderColor: 'red',
     resizeDebounce: 100,

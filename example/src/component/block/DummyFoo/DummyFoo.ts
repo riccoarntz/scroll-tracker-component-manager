@@ -16,6 +16,7 @@ export default class DummyFoo extends AbstractScrollComponent {
   {
     if(this.progressElement) {
       this.progressElement.style.width = `${progress * 100}%`;
+      this.progressElement.innerHTML = `${progress * 100}%`;
     }
   }
 
