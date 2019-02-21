@@ -1,0 +1,67 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  color: #6c757d;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+  height: 100%;
+}
+
+h1,h2,h3,h4 {
+  padding: 0;
+  margin: 0;
+}
+
+.abs-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.abs-fill {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* Heading */
+.heading-01 {
+  font-size: 8vw;
+  font-weight: 100;
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  width: 0;
+  height: 100%;
+  z-index: 0;
+}
+
+.app {
+  position: relative;
+}
+
+.block-component {
+  position: relative;
+}
+
+/* Dummy Foo */
+.dummy-foo {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  text-align: center;
+  white-space: nowrap;
+  color: #41a6ff;
+  border-bottom: 1px dashed green;
+}
+
+.dummy-foo-bg {
+  background-color: #2b3035;
+}

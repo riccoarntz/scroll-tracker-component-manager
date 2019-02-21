@@ -103,6 +103,7 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.35",
     "lodash": "^4.17.10",
-    "seng-scroll-tracker": "^1.2.2"
+    "seng-scroll-tracker": "^1.2.2",
+    "smooth-scrollbar": "^8.3.1"
   }
 }

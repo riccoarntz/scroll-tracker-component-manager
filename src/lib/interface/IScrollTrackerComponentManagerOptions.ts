@@ -1,19 +1,18 @@
 export interface IScrollTrackerComponentManagerOptions {
   container?: HTMLElement | Window;
   element?: string;
-  methods?: {
-    enterView?: string;
-    leaveView?: string;
-    beyondView?: string;
-  };
-  vars?: {
-    enterViewThreshold?: string;
-    componentId?: string;
-    hasEntered?: string;
-  };
-  config?: {
-    setDebugLabel?: boolean;
-    debugBorderColor?: string;
-    resizeDebounce?: number;
-  };
+
+  enterView?: string;
+  leaveView?: string;
+  beyondView?: string;
+  inViewProgress?: string;
+
+  enterViewThreshold?: string;
+  componentId?: string;
+  hasEntered?: string;
+
+  setDebugLabel?: boolean;
+  debugBorderColor?: string;
+  resizeDebounce?: number;
+  tresholdSteps?: number;
 }

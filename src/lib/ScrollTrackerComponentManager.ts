@@ -1,3 +1,4 @@
+import SmoothScrollbar from 'smooth-scrollbar';
 import { IScrollTrackerComponentManagerOptions } from './interface/IScrollTrackerComponentManagerOptions';
 import ScrollTracker from 'seng-scroll-tracker/lib/ScrollTracker';
 import ScrollTrackerEvent from 'seng-scroll-tracker/lib/event/ScrollTrackerEvent';
@@ -33,12 +34,14 @@ export default class ScrollTrackerComponentManager<T> {
    * @description Here we keep track of the scrollTracker points on this page
    * @type {{}}
    */
-  private scrollTrackerPoints = {};
+  private scrollTrackerPoints: { [key: string]: any } = {};
 
   /**
    * description resizeEventListener
    */
   private resizeEventListener;
+
+  public smoothScrollbar: SmoothScrollbar;
 
   /**
    * @private
@@ -48,21 +51,19 @@ export default class ScrollTrackerComponentManager<T> {
   private options: IScrollTrackerComponentManagerOptions = {
     container: window,
     element: 'element',
-    methods: {
-      enterView: 'enterView',
-      leaveView: 'leaveView',
-      beyondView: 'beyondView',
-    },
-    vars: {
-      enterViewThreshold: 'enterViewThreshold',
-      componentId: 'componentId',
-      hasEntered: 'hasEntered',
-    },
-    config: {
-      setDebugLabel: true,
-      debugBorderColor: 'red',
-      resizeDebounce: 100,
-    },
+
+    enterView: 'enterView',
+    leaveView: 'leaveView',
+    beyondView: 'beyondView',
+    inViewProgress: 'inViewProgress',
+
+    enterViewThreshold: 'enterViewThreshold',
+    componentId: 'componentId',
+    hasEntered: 'hasEntered',
+
+    setDebugLabel: true,
+    debugBorderColor: 'red',
+    resizeDebounce: 100,
   };
 
   /**
@@ -70,13 +71,30 @@ export default class ScrollTrackerComponentManager<T> {
    */
   constructor(options: IScrollTrackerComponentManagerOptions) {
     this.options = Object.assign(this.options, options);
-    this.scrollTracker = new ScrollTracker(this.options.container);
-    this.debugLabelContainer =
-      this.options.container === window ? document.body : <HTMLElement>this.options.container;
-    this.resizeEventListener = debounce(
-      this.handleResize.bind(this),
-      this.options.config.resizeDebounce,
-    );
+    this.smoothScrollbar = SmoothScrollbar.init(<HTMLElement>this.options.container, {
+      damping: 0.1,
+      thumbMinSize: 20,
+      renderByPixels: true,
+      alwaysShowTracks: true,
+      continuousScrolling: true,
+    });
+
+    this.scrollTracker = new ScrollTracker(<any>this.smoothScrollbar);
+    // this.debugLabelContainer =
+    //   this.options.container === window ? document.body : <HTMLElement>this.options.container;
+    this.debugLabelContainer = this.smoothScrollbar.contentEl;
+    this.resizeEventListener = debounce(this.handleResize.bind(this), this.options.resizeDebounce);
+
+    this.smoothScrollbar.addListener(status => {
+      Object.keys(this.scrollTrackerPoints).forEach(componentId => {
+        if (this.scrollTrackerPoints[componentId].point.isInView) {
+          this.calculateComponentProgress(componentId, status.offset.y);
+        }
+      });
+
+      this.scrollTracker.onScrollChange();
+    });
+
     window.addEventListener('resize', this.resizeEventListener);
   }
 
@@ -87,8 +105,8 @@ export default class ScrollTrackerComponentManager<T> {
    * @param {T} component
    */
   public addComponentToScrollTracker(component: T): void {
-    this.components[component[this.options.vars.componentId]] = component;
-    const componentId = component[this.options.vars.componentId];
+    this.components[component[this.options.componentId]] = component;
+    const componentId = component[this.options.componentId];
 
     // Check if it's not already added!
     if (!this.scrollTrackerPoints[componentId]) {
@@ -126,6 +144,7 @@ export default class ScrollTrackerComponentManager<T> {
         // Check for the position on init
         if (scrollTrackerPoint.isInView) {
           this.handleComponentEnterView(componentId);
+          this.calculateComponentProgress(componentId, this.smoothScrollbar.scrollTop);
         } else if (scrollTrackerPoint.hasScrolledBeyond) {
           this.handleComponentBeyondView(componentId);
         }
@@ -177,7 +196,7 @@ export default class ScrollTrackerComponentManager<T> {
    * @param {T} component
    */
   public removeComponentFromScrollTracker(component: T): void {
-    const componentId = component[this.options.vars.componentId];
+    const componentId = component[this.options.componentId];
 
     if (componentId) {
       const scrollTrackerPoint = this.scrollTrackerPoints[componentId];
@@ -198,7 +217,7 @@ export default class ScrollTrackerComponentManager<T> {
         );
 
         // Remove the debug label
-        if (this.options.config.setDebugLabel) {
+        if (this.options.setDebugLabel) {
           this.debugLabelContainer.removeChild(
             this.debugLabelContainer.querySelector('.scroll-' + componentId.replace('.', '-')),
           );
@@ -272,7 +291,7 @@ export default class ScrollTrackerComponentManager<T> {
         this.options.container === window
           ? ScrollUtils.scrollTop
           : (<HTMLElement>this.options.container).scrollTop;
-      threshold = window.innerHeight * component[this.options.vars.enterViewThreshold];
+      threshold = window.innerHeight * (component[this.options.enterViewThreshold] || 0);
     }
 
     return {
@@ -290,8 +309,21 @@ export default class ScrollTrackerComponentManager<T> {
    */
   private handleComponentEnterView(componentId: string): void {
     if (this.components[componentId]) {
-      this.components[componentId][this.options.methods.enterView]();
-      this.components[componentId][this.options.vars.hasEntered] = true;
+      this.components[componentId][this.options.enterView]();
+      this.components[componentId][this.options.hasEntered] = true;
+    }
+  }
+
+  private calculateComponentProgress(componentId: string, position: number): void {
+    if (this.components[componentId] && this.components[componentId][this.options.inViewProgress]) {
+      const point = this.scrollTrackerPoints[componentId].point;
+
+      const viewSize = point.pointTracker.viewSize;
+      const distance = viewSize + point.pointHeight;
+      const viewEnd = position + viewSize;
+
+      const progress = Math.min(Math.max(0, (viewEnd - point.position) / distance), 1);
+      this.components[componentId][this.options.inViewProgress](progress);
     }
   }
 
@@ -304,7 +336,7 @@ export default class ScrollTrackerComponentManager<T> {
    */
   private handleComponentLeaveView(componentId: string): void {
     if (this.components[componentId]) {
-      this.components[componentId][this.options.methods.leaveView]();
+      this.components[componentId][this.options.leaveView]();
     }
   }
 
@@ -318,8 +350,8 @@ export default class ScrollTrackerComponentManager<T> {
    */
   private handleComponentBeyondView(componentId: string): void {
     if (this.components[componentId]) {
-      this.components[componentId][this.options.methods.beyondView]();
-      this.components[componentId][this.options.vars.hasEntered] = true;
+      this.components[componentId][this.options.beyondView]();
+      this.components[componentId][this.options.hasEntered] = true;
     }
   }
 
@@ -329,7 +361,7 @@ export default class ScrollTrackerComponentManager<T> {
    * @param {string} componentId
    */
   private setDebugLabel(componentId: string): void {
-    if (this.options.config.setDebugLabel) {
+    if (this.options.setDebugLabel) {
       const scrollTrackerPoint = this.scrollTrackerPoints[componentId];
 
       if (!scrollTrackerPoint.debugLabel) {
@@ -343,10 +375,10 @@ export default class ScrollTrackerComponentManager<T> {
         scrollTrackerPoint.debugLabel.style.position = `absolute`;
         scrollTrackerPoint.debugLabel.style.zIndex = '99999';
         scrollTrackerPoint.debugLabel.style.borderTop = `1px solid ${
-          this.options.config.debugBorderColor
+          this.options.debugBorderColor
         }`;
         scrollTrackerPoint.debugLabel.style.borderBottom = `1px solid ${
-          this.options.config.debugBorderColor
+          this.options.debugBorderColor
         }`;
 
         scrollTrackerPoint.debugLabel.appendChild(label);
