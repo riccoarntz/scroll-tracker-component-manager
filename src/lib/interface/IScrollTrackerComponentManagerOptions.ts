@@ -15,6 +15,7 @@ export interface IScrollTrackerComponentManagerOptions {
 
   setDebugLabel?: boolean;
   debugBorderColor?: string;
+  scrollThrottle?: number;
   resizeDebounce?: number;
   tresholdSteps?: number;
 

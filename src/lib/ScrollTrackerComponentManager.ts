@@ -88,9 +88,10 @@ export default class ScrollTrackerComponentManager<T> {
 
     setDebugLabel: true,
     debugBorderColor: 'red',
+    scrollThrottle: 100,
     resizeDebounce: 100,
 
-    enableSmoothScroll: true,
+    enableSmoothScroll: false,
     smoothScrollOptions: {
       damping: 0.1,
       thumbMinSize: 20,
@@ -122,6 +123,8 @@ export default class ScrollTrackerComponentManager<T> {
       this.scrollTracker = new ScrollTracker(this.smoothScrollbar.containerEl, Axis.Y, {
         scrollContainer: <any>new SmoothScrollContainer(this.smoothScrollbar),
         attachScrollListener: false,
+        scrollThrottle: this.options.scrollThrottle,
+        resizeThrottle: this.options.resizeDebounce,
       });
 
       this.debugLabelContainer = this.smoothScrollbar.contentEl;
@@ -135,6 +138,8 @@ export default class ScrollTrackerComponentManager<T> {
       // Native Scroll
     } else {
       this.scrollTracker = new ScrollTracker(this.options.container, Axis.Y, {
+        scrollThrottle: this.options.scrollThrottle,
+        resizeThrottle: this.options.resizeDebounce,
         onScroll: position => {
           this.scrollPosition = position;
           this.updateComponentsOnScroll(position);
@@ -341,25 +346,39 @@ export default class ScrollTrackerComponentManager<T> {
    */
   private getScrollTrackerData(component: T): { height: number; yPosition: number } {
     let threshold = 0;
+    const componentBoundingClientRect = component[this.options.element].getBoundingClientRect();
+
     const baseY =
       this.options.container === window
         ? 0
         : (<HTMLElement>this.options.container).getBoundingClientRect().top;
-    let yPosition = Math.round(baseY + component[this.options.element].getBoundingClientRect().top);
-    // const thresHoldFactor = component[this.options.enterViewThreshold] || 0;
+    let yPosition = Math.round(baseY + componentBoundingClientRect.top);
 
     if (getComputedStyle(component[this.options.element]).position !== 'fixed') {
-      yPosition +=
-        this.options.container === window
-          ? ScrollUtils.scrollTop
-          : (<HTMLElement>this.options.container).scrollTop;
+      yPosition += this.getScrollTop();
       threshold = this.getTresholdSize(component, component[this.options.enterViewThreshold]);
     }
 
     return {
       yPosition: Math.max(yPosition + threshold, 0),
-      height: component[this.options.element].offsetHeight - threshold,
+      height: componentBoundingClientRect.height - threshold,
     };
+  }
+
+  /**
+   * @public
+   * @method getScrollTop
+   */
+  public getScrollTop(): number {
+    if (this.options.enableSmoothScroll) {
+      return this.smoothScrollbar.scrollTop;
+    }
+
+    if (this.options.container === window) {
+      return ScrollUtils.scrollTop;
+    }
+
+    return (<HTMLElement>this.options.container).scrollTop;
   }
 
   /**
@@ -500,6 +519,10 @@ export default class ScrollTrackerComponentManager<T> {
     if (this.scrollTracker) {
       this.scrollTracker.dispose();
       this.scrollTracker = null;
+    }
+
+    if (this.smoothScrollbar) {
+      this.smoothScrollbar.destroy();
     }
   }
 }
