@@ -6,10 +6,19 @@ export default class App extends CoreComponent {
   static displayName: string = 'app-root';
 
   public scrollTrackerComponentManager: ScrollTrackerComponentManager<any> = new ScrollTrackerComponentManager<any>({
-    // container: document.body,
     setDebugLabel: true,
     debugBorderColor: 'red',
+
+    inViewProgressEnabled: true,
+
+    scrollThrottle: 100,
     resizeDebounce: 100,
+
+    enableSmoothScroll: true,
+    smoothScrollOptions: {
+      damping: 0.1,
+      alwaysShowTracks: false,
+    },
   });
 
   constructor(element: HTMLElement) {

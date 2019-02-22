@@ -102,8 +102,9 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.35",
+    "element-size": "^1.1.1",
     "lodash": "^4.17.10",
-    "seng-scroll-tracker": "^1.2.2",
+    "seng-scroll-tracker": "^1.2.7",
     "smooth-scrollbar": "^8.3.1"
   }
 }

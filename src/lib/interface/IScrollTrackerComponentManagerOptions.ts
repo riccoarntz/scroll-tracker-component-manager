@@ -13,6 +13,7 @@ export interface IScrollTrackerComponentManagerOptions {
   hasEntered?: string;
   currentViewProgress?: string;
 
+  inViewProgressEnabled?: boolean;
   setDebugLabel?: boolean;
   debugBorderColor?: string;
   scrollThrottle?: number;
