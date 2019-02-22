@@ -5,6 +5,7 @@ export default abstract class AbstractScrollComponent extends CoreComponent {
   public enterViewThreshold: number = 0.25;
   public inViewProgressThreshold: number = 0;
   public currentViewProgress: number = 0;
+  public hasEntered: boolean = false;
 
   /**
    * @description Namespace counter base
@@ -23,8 +24,7 @@ export default abstract class AbstractScrollComponent extends CoreComponent {
    * @public
    * @method inViewProgress
    */
-  public inViewProgress(progress: number):void
-  {
+  public inViewProgress(progress: number): void {
     console.log('inViewProgress', this.componentId, progress);
   }
 
@@ -32,8 +32,7 @@ export default abstract class AbstractScrollComponent extends CoreComponent {
    * @public
    * @method enterView
    */
-  public enterView():void
-  {
+  public enterView(): void {
     // console.log(this.currentViewProgress);
     console.log('enterView', this.componentId);
   }
@@ -42,8 +41,7 @@ export default abstract class AbstractScrollComponent extends CoreComponent {
    * @public
    * @method\
    */
-  public leaveView():void
-  {
+  public leaveView(): void {
     console.log('leaveView', this.componentId);
   }
 
@@ -51,8 +49,7 @@ export default abstract class AbstractScrollComponent extends CoreComponent {
    * @public
    * @method beyondView
    */
-  public beyondView():void
-  {
+  public beyondView(): void {
     console.log('beyondView', this.componentId);
   }
 
