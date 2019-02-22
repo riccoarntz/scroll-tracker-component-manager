@@ -33,10 +33,6 @@ export default class CustomScrollTracker extends ScrollTracker {
    * Updates the size of the viewport of the target container.
    */
   public updateSize(): void {
-    if (!this.options.scrollContainer) {
-      return;
-    }
-
     const isX = this.axis === Axis.X;
     const dimensions = size(this.targetElement);
     this.viewSize = isX ? dimensions[0] : dimensions[1];
@@ -58,10 +54,6 @@ export default class CustomScrollTracker extends ScrollTracker {
    * to be called manually to update the view size.
    */
   protected initEvents(): void {
-    if (!this.options.scrollContainer) {
-      return;
-    }
-
     if (this.targetElement === window) {
       window.addEventListener(
         'resize',
