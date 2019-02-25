@@ -1,10 +1,15 @@
-Simple wrapper around html5 video player
+## Description
+The ScrollTrackerComponentManager is a `Class` that tracks whether a component is within your viewport based on your scroll position. It will/can handle the following for you:
+
+* Trigger methods such as `enterView` or `leaveView`, once you component enters/leaves your viewport.
+* Update your component with a progress value between `0` and `1`. This is the progress of you components visibility.
+* Enable smooth-scroll if needed
 
 ## Table of contents
 
 1. [Installation](#installation)
 2. [Demo](#demo)
-3. [Usage](#usage)
+3. [Documentation](#documentation)
 4. [Building](#building)
 5. [Authors](#authors)
 6. [Contribute](#contribute)
@@ -36,7 +41,7 @@ Run the example:
   yarn dev
 ```
 
-## Usage
+## Documentation
 Detailed documentation and examples are located in the wiki!
 
 ### [Check the wiki!](https://github.com/riccoarntz/scroll-tracker-component-manager/wiki)
