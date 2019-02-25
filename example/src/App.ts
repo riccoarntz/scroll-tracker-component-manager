@@ -16,7 +16,7 @@ export default class App extends CoreComponent {
 
     enableSmoothScroll: true,
     smoothScrollOptions: {
-      damping: 0.1,
+      damping: 0.2,
       alwaysShowTracks: false,
     },
   });

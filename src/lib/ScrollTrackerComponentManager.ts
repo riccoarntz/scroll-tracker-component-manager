@@ -153,18 +153,6 @@ export default class ScrollTrackerComponentManager<T> {
       this.debugLabelContainer = this.smoothScrollbar.contentEl;
       // Native Scroll
     } else {
-      customScrollTrackerOptions.container = this.options.container;
-      customScrollTrackerOptions.scrollContainer = this.options.container;
-      customScrollTrackerOptions.attachScrollListener = true;
-      customScrollTrackerOptions.onScroll = position => {
-        this.scrollPosition = position;
-
-        // Only do calculations if we want to know the progress per component.
-        if (this.options.inViewProgressEnabled) {
-          this.updateComponentsOnScroll(position);
-        }
-      };
-
       this.debugLabelContainer =
         this.options.container === window ? document.body : <HTMLElement>this.options.container;
     }
