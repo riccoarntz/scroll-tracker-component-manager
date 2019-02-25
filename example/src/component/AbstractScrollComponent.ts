@@ -2,7 +2,7 @@ import CoreComponent from 'muban-core/lib/CoreComponent';
 
 export default abstract class AbstractScrollComponent extends CoreComponent {
   public componentId: string;
-  public enterViewThreshold: number = 0.25;
+  public enterViewThreshold: number = 0;
   public inViewProgressThreshold: number = 0;
   public currentViewProgress: number = 0;
   public hasEntered: boolean = false;
