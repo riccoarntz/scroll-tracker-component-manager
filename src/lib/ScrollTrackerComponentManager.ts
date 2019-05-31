@@ -389,7 +389,7 @@ export default class ScrollTrackerComponentManager<T> {
       this.options.container === window
         ? 0
         : (<HTMLElement>this.options.container).getBoundingClientRect().top;
-    let yPosition = Math.round(baseY + componentBoundingClientRect.top);
+    let yPosition = Math.round(componentBoundingClientRect.top - baseY);
 
     if (getComputedStyle(component[this.options.element]).position !== 'fixed') {
       yPosition += this.getScrollTop();
