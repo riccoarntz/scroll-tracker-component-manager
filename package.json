@@ -1,6 +1,6 @@
 {
   "name": "scroll-tracker-component-manager",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Javascript scrollManager for detecting when components are in/out view based on scroll position",
   "main": "./index.js",
   "types": "./index.d.ts",
