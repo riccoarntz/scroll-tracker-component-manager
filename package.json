@@ -100,13 +100,13 @@
     "tslint-config-airbnb": "^5.4.2",
     "tslint-config-prettier": "^1.6.0",
     "typedoc": "^0.9.0",
-    "typescript": "^2.6.2"
+    "typescript": "^3.6.4"
   },
   "dependencies": {
     "@babel/runtime": "^7.3.1",
     "element-size": "^1.1.1",
     "lodash": "^4.17.10",
-    "seng-scroll-tracker": "^1.2.7",
+    "seng-scroll-tracker": "^2.0.0",
     "smooth-scrollbar": "^8.3.1"
   }
 }

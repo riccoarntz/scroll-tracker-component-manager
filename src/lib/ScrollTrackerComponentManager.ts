@@ -226,17 +226,17 @@ export default class ScrollTrackerComponentManager<T> {
       };
 
       scrollTrackerPoint.addEventListener(
-        ScrollTrackerEvent.ENTER_VIEW,
+        ScrollTrackerEvent.types.ENTER_VIEW,
         this.scrollTrackerPoints[componentId].enterViewListener,
       );
 
       scrollTrackerPoint.addEventListener(
-        ScrollTrackerEvent.LEAVE_VIEW,
+        ScrollTrackerEvent.types.LEAVE_VIEW,
         this.scrollTrackerPoints[componentId].leaveViewListener,
       );
 
       scrollTrackerPoint.addEventListener(
-        ScrollTrackerEvent.SCROLLED_BEYOND,
+        ScrollTrackerEvent.types.SCROLLED_BEYOND,
         this.scrollTrackerPoints[componentId].beyondViewListener,
       );
 
@@ -304,16 +304,16 @@ export default class ScrollTrackerComponentManager<T> {
 
       if (scrollTrackerPoint) {
         scrollTrackerPoint.point.removeEventListener(
-          ScrollTrackerEvent.ENTER_VIEW,
+          ScrollTrackerEvent.types.ENTER_VIEW,
           scrollTrackerPoint.enterViewListener,
         );
         scrollTrackerPoint.point.removeEventListener(
-          ScrollTrackerEvent.LEAVE_VIEW,
+          ScrollTrackerEvent.types.LEAVE_VIEW,
           scrollTrackerPoint.leaveViewListener,
         );
 
         scrollTrackerPoint.point.removeEventListener(
-          ScrollTrackerEvent.SCROLLED_BEYOND,
+          ScrollTrackerEvent.types.SCROLLED_BEYOND,
           scrollTrackerPoint.beyondViewListener,
         );
 
