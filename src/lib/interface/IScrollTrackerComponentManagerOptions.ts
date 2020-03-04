@@ -1,3 +1,5 @@
+import Axis from 'seng-scroll-tracker/lib/enum/Axis';
+
 export interface IScrollTrackerComponentManagerOptions {
   /**
    * the container that will be the scroll-area, default is the window
@@ -66,6 +68,10 @@ export interface IScrollTrackerComponentManagerOptions {
    * Number in milliseconds to update the scroll-tracker-points with a debounce if the window is being resized.
    */
   resizeDebounce?: number;
+  /**
+   * the axis of the scroll-container
+   */
+  axis?: Axis;
   /**
    * Enable/Disable smooth-scroll, [see documentation](https://github.com/idiotWu/smooth-scrollbar/blob/HEAD/docs)
    * below. By default this is set to false
