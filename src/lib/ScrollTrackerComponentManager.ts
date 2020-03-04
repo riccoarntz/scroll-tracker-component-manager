@@ -3,9 +3,10 @@ import isArray from 'lodash/isArray';
 import isObject from 'lodash/isObject';
 import Axis from 'seng-scroll-tracker/lib/enum/Axis';
 import ScrollTrackerEvent from 'seng-scroll-tracker/lib/event/ScrollTrackerEvent';
-import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
+import SmoothScrollbar from 'smooth-scrollbar';
 import { IScrollTrackerComponentManagerOptions } from './interface/IScrollTrackerComponentManagerOptions';
 import CustomScrollTracker from './util/CustomScrollTracker';
+import { HorizontalScrollPlugin } from './util/plugin/HorizontalScrollPlugin';
 import ScrollUtils from './util/ScrollUtils';
 
 /**
@@ -34,23 +35,6 @@ class SmoothScrollContainer {
 
   get scrollTop() {
     return this.instance.scrollTop;
-  }
-}
-
-class HorizontalScrollPlugin extends ScrollbarPlugin {
-  static pluginName = 'horizontalScroll';
-
-  transformDelta(delta, fromEvent) {
-    if (!/wheel/.test(fromEvent.type)) {
-      return delta;
-    }
-
-    const { x, y } = delta;
-
-    return {
-      y: 0,
-      x: Math.abs(x) > Math.abs(y) ? x : y,
-    };
   }
 }
 

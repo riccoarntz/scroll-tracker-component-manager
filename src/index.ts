@@ -3,3 +3,4 @@ export {
   IScrollTrackerComponentManagerOptions,
 } from './lib/interface/IScrollTrackerComponentManagerOptions';
 export { Axis } from 'seng-scroll-tracker';
+export { LockScrollPlugin, HorizontalScrollPlugin } from './lib/util/plugin';
