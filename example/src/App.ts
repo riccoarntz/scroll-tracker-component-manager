@@ -9,7 +9,6 @@ export default class App extends CoreComponent {
   public scrollTrackerComponentManager: ScrollTrackerComponentManager<any> = new ScrollTrackerComponentManager<any>({
     setDebugLabel: true,
     debugBorderColor: 'red',
-
     inViewProgressEnabled: true,
 
     scrollThrottle: 100,
@@ -17,8 +16,8 @@ export default class App extends CoreComponent {
     axis: Axis.X,
     enableSmoothScroll: true,
     smoothScrollOptions: {
-      damping: 0.2,
-      alwaysShowTracks: true,
+      damping: 0.1,
+      alwaysShowTracks: false,
     },
   });
 
