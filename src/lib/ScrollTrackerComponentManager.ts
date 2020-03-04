@@ -5,8 +5,8 @@ import Axis from 'seng-scroll-tracker/lib/enum/Axis';
 import ScrollTrackerEvent from 'seng-scroll-tracker/lib/event/ScrollTrackerEvent';
 import SmoothScrollbar from 'smooth-scrollbar';
 import { IScrollTrackerComponentManagerOptions } from './interface/IScrollTrackerComponentManagerOptions';
-import ScrollUtils from './util/ScrollUtils';
 import CustomScrollTracker from './util/CustomScrollTracker';
+import ScrollUtils from './util/ScrollUtils';
 
 /**
  * @description: the scrollTracker needs to be able to retreive the scrollHeight + scrollTop, from 1
@@ -18,6 +18,14 @@ class SmoothScrollContainer {
 
   constructor(instance: SmoothScrollbar) {
     this.instance = instance;
+  }
+
+  get scrollWidth() {
+    return this.instance.contentEl.scrollWidth;
+  }
+
+  get scrollLeft() {
+    return this.instance.scrollLeft;
   }
 
   get scrollHeight() {
@@ -68,6 +76,7 @@ export default class ScrollTrackerComponentManager<T> {
    */
   private scrollPosition: number = 0;
   private windowHeight: number = window.innerHeight;
+  private windowWidth: number = window.innerWidth;
 
   /**
    * @private
@@ -94,6 +103,7 @@ export default class ScrollTrackerComponentManager<T> {
     debugBorderColor: 'red',
     scrollThrottle: 100,
     resizeDebounce: 100,
+    axis: Axis.Y,
 
     enableSmoothScroll: false,
     smoothScrollOptions: {
@@ -115,7 +125,7 @@ export default class ScrollTrackerComponentManager<T> {
 
     // Default options when smoothScroll is disabled
     const customScrollTrackerOptions = {
-      axis: Axis.Y,
+      axis: this.options.axis,
       container: <HTMLElement | Window>this.options.container,
       scrollContainer: this.options.container,
       attachScrollListener: true,
@@ -173,11 +183,11 @@ export default class ScrollTrackerComponentManager<T> {
     // Add scroll listener for smooth-scroll
     if (this.smoothScrollbar) {
       this.smoothScrollbar.addListener(status => {
-        this.scrollPosition = status.offset.y;
+        this.scrollPosition = this.options.axis === Axis.X ? status.offset.x : status.offset.y;
 
         // Only do calculations if we want to know the progress per component.
         if (this.options.inViewProgressEnabled) {
-          this.updateComponentsOnScroll(status.offset.y);
+          this.updateComponentsOnScroll(this.scrollPosition);
         }
 
         this.scrollTracker.update();
@@ -213,8 +223,8 @@ export default class ScrollTrackerComponentManager<T> {
       // Get the correct data
       const scrollTrackerData = this.getScrollTrackerData(component);
       const scrollTrackerPoint = this.scrollTracker.addPoint(
-        scrollTrackerData.yPosition,
-        scrollTrackerData.height,
+        scrollTrackerData.position,
+        scrollTrackerData.size,
       );
 
       // Store the reference
@@ -354,8 +364,8 @@ export default class ScrollTrackerComponentManager<T> {
       // Fetch the new dimensions
       const scrollTrackerData = this.getScrollTrackerData(scrollComponent);
 
-      scrollTrackerPoint.position = scrollTrackerData.yPosition;
-      scrollTrackerPoint.height = scrollTrackerData.height;
+      scrollTrackerPoint.position = scrollTrackerData.position;
+      scrollTrackerPoint.height = scrollTrackerData.size;
 
       this.setDebugLabel(componentId);
     });
@@ -370,6 +380,7 @@ export default class ScrollTrackerComponentManager<T> {
    */
   public handleResize(): void {
     this.windowHeight = window.innerHeight;
+    this.windowWidth = window.innerWidth;
 
     this.updateScrollTrackerPoints();
   }
@@ -381,25 +392,48 @@ export default class ScrollTrackerComponentManager<T> {
    * is set(position and height is used for adding to the scroll-tracker to determine enter/leave view points.
    * @returns {{height: number; yPosition: number}}
    */
-  private getScrollTrackerData(component: T): { height: number; yPosition: number } {
+  private getScrollTrackerData(component: T): { size: number; position: number } {
     let threshold = 0;
     const componentBoundingClientRect = component[this.options.element].getBoundingClientRect();
+    let componentSize = componentBoundingClientRect.height;
 
-    const baseY =
-      this.options.container === window
-        ? 0
-        : (<HTMLElement>this.options.container).getBoundingClientRect().top;
-    let yPosition = Math.round(componentBoundingClientRect.top - baseY);
+    let basePosition: number = 0;
+    if (this.options.container !== window) {
+      const containerRect = (<HTMLElement>this.options.container).getBoundingClientRect();
+      basePosition = this.options.axis === Axis.X ? containerRect.left : containerRect.top;
+    }
+
+    let position = Math.round(componentBoundingClientRect.top - basePosition);
+    if (this.options.axis === Axis.X) {
+      position = Math.round(componentBoundingClientRect.left - basePosition);
+      componentSize = componentBoundingClientRect.width;
+    }
 
     if (getComputedStyle(component[this.options.element]).position !== 'fixed') {
-      yPosition += this.getScrollTop();
+      position += this.getScroll();
       threshold = this.getTresholdSize(component, component[this.options.enterViewThreshold]);
     }
 
     return {
-      yPosition: Math.max(yPosition + threshold, 0),
-      height: componentBoundingClientRect.height - threshold,
+      position: Math.max(position + threshold, 0),
+      size: componentSize - threshold,
     };
+  }
+
+  /**
+   * @public
+   * @method getScrollLeft
+   */
+  public getScrollLeft(): number {
+    if (this.options.enableSmoothScroll) {
+      return this.smoothScrollbar.scrollLeft;
+    }
+
+    if (this.options.container === window) {
+      return ScrollUtils.scrollLeft;
+    }
+
+    return (<HTMLElement>this.options.container).scrollLeft;
   }
 
   /**
@@ -420,13 +454,29 @@ export default class ScrollTrackerComponentManager<T> {
 
   /**
    * @private
+   * @method getScroll
+   */
+  private getScroll(): number {
+    if (this.options.axis === Axis.X) {
+      return this.getScrollLeft();
+    }
+
+    return this.getScrollTop();
+  }
+
+  /**
+   * @private
    * @method getTresholdSize
    */
   private getTresholdSize(component: T, thresholdFactor: number = 0): number {
     let threshold = 0;
 
     if (getComputedStyle(component[this.options.element]).position !== 'fixed') {
-      threshold = this.windowHeight * thresholdFactor;
+      if (this.options.axis === Axis.X) {
+        threshold = this.windowWidth * thresholdFactor;
+      } else {
+        threshold = this.windowHeight * thresholdFactor;
+      }
     }
 
     return threshold;
@@ -529,19 +579,31 @@ export default class ScrollTrackerComponentManager<T> {
 
         scrollTrackerPoint.debugLabel.style.position = `absolute`;
         scrollTrackerPoint.debugLabel.style.zIndex = '99999';
-        scrollTrackerPoint.debugLabel.style.borderTop = `1px solid ${
-          this.options.debugBorderColor
-        }`;
-        scrollTrackerPoint.debugLabel.style.borderBottom = `1px solid ${
-          this.options.debugBorderColor
-        }`;
 
         scrollTrackerPoint.debugLabel.appendChild(label);
         this.debugLabelContainer.appendChild(scrollTrackerPoint.debugLabel);
-      }
 
-      scrollTrackerPoint.debugLabel.style.height = `${scrollTrackerPoint.point.height}px`;
-      scrollTrackerPoint.debugLabel.style.top = `${scrollTrackerPoint.point.position}px`;
+        if (this.options.axis === Axis.X) {
+          scrollTrackerPoint.debugLabel.style.width = `${scrollTrackerPoint.point.height}px`;
+          scrollTrackerPoint.debugLabel.style.left = `${scrollTrackerPoint.point.position}px`;
+          scrollTrackerPoint.debugLabel.style.top = 0;
+          scrollTrackerPoint.debugLabel.style.borderLeft = `1px solid ${
+            this.options.debugBorderColor
+          }`;
+          scrollTrackerPoint.debugLabel.style.borderRight = `1px solid ${
+            this.options.debugBorderColor
+          }`;
+        } else {
+          scrollTrackerPoint.debugLabel.style.height = `${scrollTrackerPoint.point.height}px`;
+          scrollTrackerPoint.debugLabel.style.top = `${scrollTrackerPoint.point.position}px`;
+          scrollTrackerPoint.debugLabel.style.borderTop = `1px solid ${
+            this.options.debugBorderColor
+          }`;
+          scrollTrackerPoint.debugLabel.style.borderBottom = `1px solid ${
+            this.options.debugBorderColor
+          }`;
+        }
+      }
     }
   }
 

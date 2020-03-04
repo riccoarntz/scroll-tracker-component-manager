@@ -1,6 +1,7 @@
 import getComponentForElement from 'muban-core/lib/utils/getComponentForElement';
 import ScrollTrackerComponentManager from '../../src/lib/ScrollTrackerComponentManager';
 import CoreComponent from 'muban-core/lib/CoreComponent';
+import { Axis } from 'seng-scroll-tracker';
 
 export default class App extends CoreComponent {
   static displayName: string = 'app-root';
@@ -13,11 +14,11 @@ export default class App extends CoreComponent {
 
     scrollThrottle: 100,
     resizeDebounce: 100,
-
+    axis: Axis.X,
     enableSmoothScroll: true,
     smoothScrollOptions: {
       damping: 0.2,
-      alwaysShowTracks: false,
+      alwaysShowTracks: true,
     },
   });
 
