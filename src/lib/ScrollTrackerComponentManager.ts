@@ -98,6 +98,7 @@ export default class ScrollTrackerComponentManager<T> {
     componentId: 'componentId',
     hasEntered: 'hasEntered',
     currentViewProgress: 'currentViewProgress',
+    scrollDirection: 'scrollDirection',
 
     inViewProgressEnabled: false,
     setDebugLabel: true,
@@ -132,11 +133,7 @@ export default class ScrollTrackerComponentManager<T> {
       attachScrollListener: true,
       onScroll: position => {
         this.scrollPosition = position;
-
-        // Only do calculations if we want to know the progress per component.
-        if (this.options.inViewProgressEnabled) {
-          this.updateComponentsOnScroll(position);
-        }
+        this.updateComponentsOnScroll(position);
       },
       scrollThrottle: this.options.scrollThrottle,
       resizeDebounce: this.options.resizeDebounce,
@@ -191,10 +188,7 @@ export default class ScrollTrackerComponentManager<T> {
       this.smoothScrollbar.addListener(status => {
         this.scrollPosition = this.options.axis === Axis.X ? status.offset.x : status.offset.y;
 
-        // Only do calculations if we want to know the progress per component.
-        if (this.options.inViewProgressEnabled) {
-          this.updateComponentsOnScroll(this.scrollPosition);
-        }
+        this.updateComponentsOnScroll(this.scrollPosition);
 
         this.scrollTracker.update();
       });
@@ -504,6 +498,12 @@ export default class ScrollTrackerComponentManager<T> {
 
   private calculateComponentProgress(componentId: string, position: number): void {
     const component = this.components[componentId];
+
+    if (this.components[componentId]) {
+      this.components[componentId][
+        this.options.scrollDirection
+      ] = this.scrollTracker.getScrollDirection();
+    }
 
     if (
       this.options.inViewProgressEnabled &&

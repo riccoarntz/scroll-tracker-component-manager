@@ -49,6 +49,10 @@ export interface IScrollTrackerComponentManagerOptions {
    */
   currentViewProgress?: string;
   /**
+   * PropertyName of the component where we will store the scrollDirection.
+   */
+  scrollDirection?: string;
+  /**
    * When this is set to true we will call the method inViewProgress(progress). By default this is set to false.
    */
   inViewProgressEnabled?: boolean;

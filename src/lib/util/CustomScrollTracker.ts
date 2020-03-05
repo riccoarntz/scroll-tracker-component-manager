@@ -1,10 +1,12 @@
-import Axis from 'seng-scroll-tracker/lib/enum/Axis';
-import ScrollTracker from 'seng-scroll-tracker/lib/ScrollTracker';
 import size from 'element-size';
 import throttle from 'lodash/throttle';
+import Axis from 'seng-scroll-tracker/lib/enum/Axis';
+import ScrollTracker from 'seng-scroll-tracker/lib/ScrollTracker';
+import { Direction } from '../enum/Direction';
 import { ICustomScrollTrackerOptions } from '../interface/ICustomScrollTrackerOptions';
 
 export default class CustomScrollTracker extends ScrollTracker {
+  private scrollDirection: Direction = Direction.FORWARD;
   private options: ICustomScrollTrackerOptions = {
     scrollContainer: null,
     attachScrollListener: true,
@@ -79,10 +81,9 @@ export default class CustomScrollTracker extends ScrollTracker {
    */
   public update(): void {
     this.updateScrollPosition();
-    const scrollingBack = this.viewStart < this.lastScrollPosition;
 
     for (let i = 0; i < this.trackingPoints.length; i += 1) {
-      this.trackingPoints[i].checkInView(scrollingBack);
+      this.trackingPoints[i].checkInView(this.scrollDirection === Direction.BACK);
     }
   }
 
@@ -97,7 +98,18 @@ export default class CustomScrollTracker extends ScrollTracker {
 
     this.viewEnd = this.viewStart + this.viewSize;
 
+    this.scrollDirection =
+      this.viewStart < this.lastScrollPosition ? Direction.BACK : Direction.FORWARD;
+
     this.lastScrollPosition = this.viewStart;
+  }
+
+  /**
+   * @public
+   * @method isScrollingBack
+   */
+  public getScrollDirection(): Direction {
+    return this.scrollDirection;
   }
 
   /**

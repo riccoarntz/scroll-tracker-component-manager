@@ -1,4 +1,5 @@
 import CoreComponent from 'muban-core/lib/CoreComponent';
+import { Direction } from '../../../src/lib/enum/Direction';
 
 export default abstract class AbstractScrollComponent extends CoreComponent {
   public componentId: string;
@@ -6,6 +7,7 @@ export default abstract class AbstractScrollComponent extends CoreComponent {
   public inViewProgressThreshold: number = 0;
   public currentViewProgress: number = 0;
   public hasEntered: boolean = false;
+  public scrollDirection:Direction = Direction.FORWARD;
 
   /**
    * @description Namespace counter base
@@ -25,7 +27,8 @@ export default abstract class AbstractScrollComponent extends CoreComponent {
    * @method inViewProgress
    */
   public inViewProgress(progress: number): void {
-    console.log('inViewProgress', this.componentId, progress);
+    console.log('inViewProgress', this.componentId, progress, this.scrollDirection);
+
   }
 
   /**
@@ -34,7 +37,7 @@ export default abstract class AbstractScrollComponent extends CoreComponent {
    */
   public enterView(): void {
     // console.log(this.currentViewProgress);
-    console.log('enterView', this.componentId);
+    console.log('enterView', this.componentId, this.scrollDirection);
   }
 
   /**
@@ -42,7 +45,7 @@ export default abstract class AbstractScrollComponent extends CoreComponent {
    * @method\
    */
   public leaveView(): void {
-    console.log('leaveView', this.componentId);
+    console.log('leaveView', this.componentId, this.scrollDirection);
   }
 
   /**
@@ -50,7 +53,7 @@ export default abstract class AbstractScrollComponent extends CoreComponent {
    * @method beyondView
    */
   public beyondView(): void {
-    console.log('beyondView', this.componentId);
+    console.log('beyondView', this.componentId, this.scrollDirection);
   }
 
   public get displayName() {
