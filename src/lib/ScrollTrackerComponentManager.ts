@@ -588,27 +588,27 @@ export default class ScrollTrackerComponentManager<T> {
 
         scrollTrackerPoint.debugLabel.appendChild(label);
         this.debugLabelContainer.appendChild(scrollTrackerPoint.debugLabel);
+      }
 
-        if (this.options.axis === Axis.X) {
-          scrollTrackerPoint.debugLabel.style.width = `${scrollTrackerPoint.point.height}px`;
-          scrollTrackerPoint.debugLabel.style.left = `${scrollTrackerPoint.point.position}px`;
-          scrollTrackerPoint.debugLabel.style.top = 0;
-          scrollTrackerPoint.debugLabel.style.borderLeft = `1px solid ${
-            this.options.debugBorderColor
-          }`;
-          scrollTrackerPoint.debugLabel.style.borderRight = `1px solid ${
-            this.options.debugBorderColor
-          }`;
-        } else {
-          scrollTrackerPoint.debugLabel.style.height = `${scrollTrackerPoint.point.height}px`;
-          scrollTrackerPoint.debugLabel.style.top = `${scrollTrackerPoint.point.position}px`;
-          scrollTrackerPoint.debugLabel.style.borderTop = `1px solid ${
-            this.options.debugBorderColor
-          }`;
-          scrollTrackerPoint.debugLabel.style.borderBottom = `1px solid ${
-            this.options.debugBorderColor
-          }`;
-        }
+      if (this.options.axis === Axis.X) {
+        scrollTrackerPoint.debugLabel.style.width = `${scrollTrackerPoint.point.height}px`;
+        scrollTrackerPoint.debugLabel.style.left = `${scrollTrackerPoint.point.position}px`;
+        scrollTrackerPoint.debugLabel.style.top = 0;
+        scrollTrackerPoint.debugLabel.style.borderLeft = `1px solid ${
+          this.options.debugBorderColor
+        }`;
+        scrollTrackerPoint.debugLabel.style.borderRight = `1px solid ${
+          this.options.debugBorderColor
+        }`;
+      } else {
+        scrollTrackerPoint.debugLabel.style.height = `${scrollTrackerPoint.point.height}px`;
+        scrollTrackerPoint.debugLabel.style.top = `${scrollTrackerPoint.point.position}px`;
+        scrollTrackerPoint.debugLabel.style.borderTop = `1px solid ${
+          this.options.debugBorderColor
+        }`;
+        scrollTrackerPoint.debugLabel.style.borderBottom = `1px solid ${
+          this.options.debugBorderColor
+        }`;
       }
     }
   }
